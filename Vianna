@@ -1,0 +1,87 @@
+# I created an employee management system in Java which is similar
+# to the Python one but contains slightly different classes and methods.
+
+import java.util.Date;
+
+abstract class Employee {
+    // Employee abstract class. Cannot be
+    //instantiated on its own. Blueprint for other classes
+    private String name; // 3 private instance variables which represents attributes of all employees
+    private double salary;
+    private Date dateofBirth;
+
+    public Employee(String name, double salary, Date dateofBirth){ //Constructor for "Employee" takes these attributes as parameters
+        // and initializes them.
+        this.name = name;
+        this.salary = salary;
+        this.dateofBirth = dateofBirth;
+    }
+    public String getName(){
+        return name;
+    }
+
+    public double getSalary(){
+        return salary;
+
+    }
+    public abstract void work(); // This method will be implemented by
+    //The class also declares an abstract method "work()".
+    // This method will be implemented by subclasses
+    // to specify the work each type of employee does.
+    //subclasses
+}
+import java.util.Date;
+
+class Manager extends Employee{ //Three subclasses inherit the attributes
+    //from the parent class.
+    private String department;
+
+    public Manager(String name, double salary, Date dateofBirth, String department){
+        super(name, salary, dateofBirth);
+        this.department = department;
+    }
+
+    public String getDepartment(){
+        return department;
+    }
+
+    @Override
+    public void work(){
+        System.out.println("Manager is managing the department: " + department);
+    }
+}
+import java.util.Date;
+
+class Sales extends Employee {
+    private int salesTarget;
+
+    public Sales(String name, double salary, Date dateofBirth, int salesTarget){
+        super(name, salary, dateofBirth);
+        this.salesTarget = salesTarget;
+    }
+    public int getSalesTarget(){
+        return salesTarget;
+    }
+    @Override
+    public void work(){ //The 'work' method is called on each instance to
+
+        System.out.println("Salesperson in working on achieving the sales target:" + salesTarget);
+    }
+}
+
+import java.util.Date;
+
+public class EmployeeManagementSystem{
+    public static void main(String [] args){
+        //Create instances of different employees
+        Manager manager = new Manager("John Manager", 6000, new Date(), "HR");
+        Sales salesperson = new Sales("Sarah Sales", 4500, new Date(), 100000);
+        //Development developer = new Development("David Developer", 55000, new Date(), "Project X");
+
+
+        //Call the work method for each employee
+        manager.work();
+        salesperson.work();
+        // developer.work();
+    }
+}
